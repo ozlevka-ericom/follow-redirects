@@ -656,9 +656,7 @@ describe('follow-redirects ', function () {
 	describe('test simple work with head function. Redirect without send any content.', function () {
 		it('redirect by head', function (done) {
 			app.all('/a', redirectsTo('http://localhost:3600/b'));
-			app.all('/b', function (req, res) {
-				res.send(200, sendsJson({a: 'b'}));
-			});
+			app.all('/b', sendsJson({a: 'b'}));
 
 			server.start(app)
 				.then(asPromise(function (resolve, reject) {
@@ -667,9 +665,8 @@ describe('follow-redirects ', function () {
 				.then(function (res) {
 					assert.deepEqual(res.statusCode, 200);
 					assert.deepEqual(res.responseUrl, 'http://localhost:3600/b');
-				})
-				.nodeify(done);
-		});
+				}).nodefy(done);
+		}).timeout(3000);
 	});
 });
 

@@ -7,7 +7,8 @@
     "node": ">=4.0"
   },
   "scripts": {
-    "test": "xo && BLUEBIRD_DEBUG=1 nyc mocha"
+    "test": "BLUEBIRD_DEBUG=1 nyc mocha",
+	"site-test": "./node_modules/mocha/bin/mocha ./test/test-sites.js --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -58,11 +59,6 @@
     "reporter": [
       "lcov",
       "text"
-    ]
-  },
-  "xo": {
-    "envs": [
-      "mocha"
     ]
   }
 }
